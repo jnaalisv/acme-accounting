@@ -25,6 +25,11 @@ class CustomerControllerIntegrationTest {
                 .andExpect(status().isCreated())
                 .andExpect(header().string("Content-Type", "application/json;charset=UTF-8"))
                 .andExpect(header().string("Location", "customers/1"));
+
+        mvc.perform(get("/customers/1"))
+                .andExpect(status().isOk())
+                .andExpect(header().string("Content-Type", "application/json;charset=UTF-8"))
+                .andExpect(content().json("{\"name\":\"ComputerArtists Inc\"}"));
     }
 
     @Test
