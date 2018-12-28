@@ -12,6 +12,11 @@ repositories {
     mavenCentral()
 }
 
+ext['junit-jupiter.version'] = '5.4.0-M1'
+
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-web"
+
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+    testCompile("org.junit.jupiter:junit-jupiter")
 }
