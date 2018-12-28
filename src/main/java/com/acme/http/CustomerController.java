@@ -1,11 +1,9 @@
 package com.acme.http;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.Collections;
@@ -34,11 +32,21 @@ public class CustomerController {
         return new CustomerDTO(1L, "ComputerArtists Inc");
     }
 
+    @PutMapping(value = "customers/{customerId}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public CustomerDTO updateCustomer(@PathVariable long customerId, @RequestBody CustomerDTO customerDTO) {
+        return customerDTO;
+    }
+
+    @DeleteMapping(value = "customers/{customerId}")
+    public void deleteCustomer(@PathVariable long customerId) {
+    }
+
+
     private static class CustomerDTO {
         public Long id;
         public String name;
 
-        public CustomerDTO(Long id, String name) {
+        public CustomerDTO(@JsonProperty("id") Long id, @JsonProperty("name") String name) {
             this.id = id;
             this.name = name;
         }
